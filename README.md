@@ -14,4 +14,16 @@ This is a NodeRed flow that captures the button press with an MQTT node and then
 
 You'll want to modify the MQTT node topic to match the topic that you set in dash.js and you'll want to change the name of the variable set.
 
+## dash.sh
+
+This is an init.d startup script. Modify the PROCDIR variable at the top of the script with the directory where you've placed dash.js.
+
+Copy this file to `/etc/init.d/dash`. Run the commands to install the script to start it up as a daemon.
+
+```
+sudo chmod +x /etc/init.d/dash
+sudo systemctl enable dash.service
+sudo service dash start
+```
+
 ![Flow Screenshot](nodedash.png)
