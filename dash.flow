@@ -1,0 +1,67 @@
+[
+  {
+    "id": "7add9f95.36737",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "15.1.4.50",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "verifyservercert": true,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": null,
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": null,
+    "birthPayload": ""
+  },
+  {
+    "id": "d814ac59.51db5",
+    "type": "debug",
+    "z": "828b7952.cf43c8",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "true",
+    "x": 585,
+    "y": 324,
+    "wires": []
+  },
+  {
+    "id": "31036645.e9fe8a",
+    "type": "mqtt in",
+    "z": "828b7952.cf43c8",
+    "name": "Peets Button",
+    "topic": "dashbutton/peets",
+    "broker": "7add9f95.36737",
+    "x": 124.5,
+    "y": 325,
+    "wires": [
+      [
+        "d814ac59.51db5",
+        "1a8e95fc.25de7a"
+      ]
+    ]
+  },
+  {
+    "id": "1a8e95fc.25de7a",
+    "type": "function",
+    "z": "828b7952.cf43c8",
+    "name": "Set Peets Variable",
+    "func": "node.warn('start');\nif (!context.global.state) {\n    node.warn('context.global.state is null');\n    context.global.state = { peets: false };\n    if (context.global.state.peets === null) {\n        node.warn('context.global.state.peets is null');\n        context.global.state.peets = false;\n    }\n}\nif (context.global.state && context.global.state.peets) {\n    node.warn('toggle state');\n    context.global.state.peets = !context.global.state.peets;\n} else {\n    node.warn('setting state to true');\n    context.global.state.peets = true;\n}\n node.warn('sending msg: ' + context.global.state.peets);\n return context.global.state.peets;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 365.5,
+    "y": 383,
+    "wires": [
+      [
+        "d814ac59.51db5"
+      ]
+    ]
+  }
+]
